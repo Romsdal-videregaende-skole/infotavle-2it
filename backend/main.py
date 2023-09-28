@@ -14,9 +14,9 @@ def index():
 
 @app.route('/joke', methods=['GET'])
 def jokes():
-    while True:
-        res = joke.getJoke()
-        return res
+
+    res = joke.getJoke()
+    return res
 
 if __name__ == '__main__':
     app.run(port=5500, debug=True)
