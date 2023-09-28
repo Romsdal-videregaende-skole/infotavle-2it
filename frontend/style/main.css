@@ -54,9 +54,15 @@ body {
     width: 1%;
     height: 100%;
     background-color: #00ff73;
-    transition: width 0.5s;
+    transition: width 10s;
 }
 
 button {
     color: white;
+}
+
+.Bottom{
+    width: 50px;
+    height: 20px;
+    border: 3px solid green;
 }
