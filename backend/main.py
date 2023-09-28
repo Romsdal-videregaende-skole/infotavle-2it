@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, render_template
 from flask_cors import CORS
 import json
 from src.lib import joke
@@ -9,7 +9,7 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return send_from_directory("src/pages", "index.html")
+    return render_template("index.html")
 
 
 @app.route('/joke', methods=['GET'])

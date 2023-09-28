@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style/main.css">
+    <title>Infotavle</title>
+
 </head>
-<body>
-    <h1>Index main</h1>
+<body onload="startTime()">
+    <div id="clock"></div>
+    <div class="vær">
+        <p>Temperatur nå:</p>
+    </div>
+    <div class="nesteTime">
+        <p>Neste time:</p>
+        <p id="fag">YFF</p>
+    </div>
+    <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+    </div>
+    <button onclick="getJoke()">Clickme</button>
 </body>
-</html>
+<script src="script/clock.js"></script>
+<script src="script/jokes.js"></script>
+</html> 
