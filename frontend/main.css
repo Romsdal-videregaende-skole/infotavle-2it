@@ -1,12 +1,10 @@
 body {
-    background-color: #47A2C0;
-    ;
+    background-color: #0077B6;
     margin: 0;
 }
 
 #clock {
     color: white;
-    background-color: red;
     font-size: 11em;
     display: flex;
     justify-content: center;
@@ -16,7 +14,6 @@ body {
 }
 
 .vær {
-    background-color: red;
     display: flex;
     justify-content: center;
     color: white;
@@ -26,7 +23,6 @@ body {
 }
 
 .nesteTime {
-    background-color: red;
     text-align: center;
     color: white;
     width: 40%;
