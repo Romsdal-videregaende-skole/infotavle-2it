@@ -56,3 +56,7 @@ body {
     background-color: #00ff73;
     transition: width 0.5s;
 }
+
+button {
+    color: white;
+}
