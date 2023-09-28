@@ -9,6 +9,8 @@ from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import time,os,dotenv
 
+
+
 def getVisma():
     def clickElement(type,element):
         time.sleep(1)
@@ -49,7 +51,8 @@ def getVisma():
     password.send_keys(Password)
     
     clickElement(By.CLASS_NAME,"button-primary")
-    
+    print("logging in")
+
     wait = WebDriverWait(driver,10)
     wait.until(EC.presence_of_element_located((By.CLASS_NAME,"sr-only")))
     page_source = driver.page_source
@@ -73,11 +76,10 @@ def getVisma():
                 
                 lesson_start = time_info[1].split()
                 times.append([course_name,lesson_start[0]])
+    print(times)
     
-    if times:
-        driver.quit()
-        return times
-    getVisma()
+    driver.quit()
+    return times
     
     # Add a delay to keep the browser window open for 10 seconds (or adjust as needed)
 
