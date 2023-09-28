@@ -1,11 +1,11 @@
 import json, requests
 
-x = requests.get('https://v2.jokeapi.dev/joke/Any')
+
 
 
 def getJoke():
-
-    joke = json.loads(x.text)
+    request = requests.get('https://v2.jokeapi.dev/joke/Any')
+    joke = json.loads(request.text)
     if joke.get('joke') is not None:
         print("joke", joke.get('joke'))
         return json.dumps({"Setup": None, "Delivery": joke.get('joke')})

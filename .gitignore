@@ -1,0 +1,3 @@
+backend/.venv
+backend/src/lib/__pycache__/
+*.pyc
