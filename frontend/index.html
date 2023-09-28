@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infotavle</title>
-    <link rel="stylesheet" href="main.css">
+
 </head>
 <body onload="startTime()">
     <div id="clock"></div>
@@ -19,29 +19,8 @@
         <div class="loading-bar"> 
         </div>
     </div>
-                <br>
-<button onclick="move()">Click Me</button> 
-
-            <script>
-                var i = 0;
-function move() {
-  if (i == 0) {
-    i = 1;
-    var elem = document.getElementsByClassName("loading-bar");
-    var width = 1;
-    var id = setInterval(frame, 10);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        i = 0;
-      } else {
-        width++;
-        elem.style.width = width + "%";
-      }
-    }
-  }
-}
-            </script>
+    <button onclick="getJoke()">Clickme</button>
 </body>
-<script src="clock.js"></script>
+<script src="script/clock.js"></script>
+<script src="script/jokes.js"></script>
 </html> 
