@@ -21,3 +21,24 @@ body {
 .nesteTime {
     background-color: red;
 }
+
+.loading-bar-container{
+    width: 50%; 
+    height: 20px; 
+    background-color: #000000;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 25%;
+    margin-top: 50%;
+}
+
+.loading-bar{
+    display: flex;
+    justify-content: center;
+    width: 0;
+    height: 100%;
+    margin-left: 20%;
+    margin-top: 50%;
+    background-color: #0078d4;
+    transition: width 0.5s;
+}
