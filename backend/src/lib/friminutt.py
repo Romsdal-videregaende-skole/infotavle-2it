@@ -13,6 +13,10 @@ def liste(time_string):
             return
 
 
+
+#1% av 45min = 27 sekund 45/100 = 0,45*60 =27 sekund
+
+
 if __name__ == __main__:
     liste(time_string)
 
