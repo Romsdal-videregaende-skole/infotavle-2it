@@ -6,11 +6,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from datetime import datetime
 from bs4 import BeautifulSoup
+from functools import cache
 import time,os,dotenv
 
 
-
+@cache
 def getVisma():
     def clickElement(type,element):
         time.sleep(1)
@@ -57,11 +59,12 @@ def getVisma():
     wait.until(EC.presence_of_element_located((By.CLASS_NAME,"sr-only")))
     page_source = driver.page_source
     soup = BeautifulSoup(page_source,'html.parser')
+    print("Parsing HTML")
     time.sleep(5)
     info_element = soup.find("div",class_="active Timetable-TimetableDays_day")
     
     times = []
-    
+
     if info_element:
         div_elements = info_element.find_all("div")
         
@@ -76,7 +79,7 @@ def getVisma():
                 
                 lesson_start = time_info[1].split()
                 times.append([course_name,lesson_start[0]])
-    print(times)
+
     
     driver.quit()
     return times

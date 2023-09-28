@@ -1,7 +1,7 @@
 from flask import Flask, send_from_directory, url_for, render_template
 from flask_cors import CORS
 from datetime import datetime
-from functools import cache
+
 from src.lib import joke
 from src.lib.visma import getVisma
 import json
@@ -19,13 +19,14 @@ def index():
 def serve_static(filename):
     return send_from_directory("../frontend", filename)
 
+
 @app.route('/joke', methods=['GET'])
 def jokes():
 
     res = joke.getJoke()
     return res
 
-@cache
+
 @app.route('/visma', methods=['GET'])
 def visma():
     def fetchAPI():
@@ -34,11 +35,11 @@ def visma():
             fetchAPI()
         return timeplan
     timeplan = fetchAPI()
-    timer = {"day": datetime.today()}
-
+    timer = {}
     for i in range(len(timeplan)):
         timer[timeplan[i][1]] = timeplan[i][0]
     return timer
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True, host="0.0.0.0")
