@@ -9,7 +9,7 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return send_from_directory("src/pages", "index.html")
+    return send_from_directory("../frontend", "index.html")
 
 
 @app.route('/joke', methods=['GET'])
@@ -19,4 +19,4 @@ def jokes():
     return res
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=True, host="0.0.0.0")
