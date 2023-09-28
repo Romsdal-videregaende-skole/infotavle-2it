@@ -16,9 +16,32 @@
         <p id="fag">YFF</p>
     </div>
     <div class="loading-bar-container">
-        <div class="loading-bar"></div>
+        <div class="loading-bar"> 
+        </div>
     </div>
+                <br>
+<button onclick="move()">Click Me</button> 
 
+            <script>
+                var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementsByClassName("loading-bar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
+            </script>
 </body>
 <script src="clock.js"></script>
 </html> 
