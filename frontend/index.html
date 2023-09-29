@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infotavle</title>
-    <link rel="stylesheet" type="text/css" href="style/main.css">
-
+    <link rel="stylesheet" href="style/main.css">
 </head>
-<body onload="startTime()">
+<body onload="startTime()" class="Section_top">
     <div id="clock"></div>
     <div class="dato-container">
 
 
     </div>
     <div class="vær">
-        <p>Temperatur nå:</p>
+        <p>Temperatur nå:</p> <p id="temp">18°C</p>
     </div>
 
     <div class="nesteTime">
@@ -29,9 +28,12 @@
         </div>
     </div>
     <button onclick="getJoke()">Clickme</button>
-    <div class="bottom-div">
-        <button onclick="move()" class="Bottom"></button>
+    <div class="container">
+        <div class="vertical-center">
+        <button onclick="startLoading()" class="Bottom"></button>
+        </div>
     </div>
+    
     
 </body>
 <script src="script/clock.js"></script>
