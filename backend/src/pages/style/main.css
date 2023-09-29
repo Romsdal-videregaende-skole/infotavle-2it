@@ -45,25 +45,18 @@ body {
     background-color: #000000;
     border-radius: 10px;
     overflow: hidden;
+
+    
+
 }
 
 #loading-bar{
     width: 1%;
     height: 100%;
     background-color: #00ff73;
-    transition: width 10s;
+    transition: width 0.5s;
 }
 
 button {
     color: white;
-}
-
-#temp {
-    margin-left: 3%;
-}
-
-.Bottom{
-    width: 50px;
-    height: 20px;
-    border: 3px solid green;
 }

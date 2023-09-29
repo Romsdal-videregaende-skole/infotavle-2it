@@ -8,5 +8,8 @@ def temperature():
     print (response['currentConditions']['temp'])  #magnus fiksa william sin kode  ƪ(˘⌣˘)ʃ
     return
 
+<<<<<<< HEAD
 if __name__ == '__main__':
     temperature()
+=======
+>>>>>>> a34be625ad7c229d4b422456cee8b8ad1f20c80c
