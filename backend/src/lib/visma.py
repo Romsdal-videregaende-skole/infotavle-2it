@@ -12,10 +12,10 @@ from functools import cache
 import time,os,dotenv
 
 
-@cache
+
 def getVisma():
     def clickElement(type,element):
-        time.sleep(1)
+        time.sleep(2)
         object = driver.find_element(type,element)
         object.click()
     
@@ -38,7 +38,7 @@ def getVisma():
     driver.get("https://romsdal-vgs.inschool.visma.no/")
     
     # Locate the login button by its name and click it
-    
+    time.sleep(2)
     clickElement(By.ID,"onetrust-accept-btn-handler")
     
     clickElement(By.ID,"login-with-feide-button")
