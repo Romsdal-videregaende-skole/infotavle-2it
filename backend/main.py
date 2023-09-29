@@ -3,8 +3,10 @@ from flask_cors import CORS
 from datetime import datetime
 
 from src.lib import joke
+from src.lib import friminutt
 from src.lib.visma import getVisma
 import json
+
 
 app = Flask(__name__, template_folder="../frontend")  # Oppretter flask app
 CORS(app)  # Flask CORS Står for Cross-Origin Resource Sharing som gjør at vi kan dele info mellom backend og frontend
@@ -15,11 +17,20 @@ def index():
     return render_template("index.html")
 
 
+
+
+
 # /<path:filename> gjør at HTML kan få tak i de statiske elementene
 @app.route('/<path:filename>')
 def serve_static(filename):
     return send_from_directory("../frontend", filename)
 
+@app.route('/friminutt')
+def getFriminutt():
+    friminutt_start = ["9:5", "9:55", "10:55", "11:45", "13:00", "13:50", "14:40"]
+    friminutter = friminutt.liste(friminutt_start)
+    print(friminutter)
+    return {"friminutt": friminutter[1]/100}
 
 @app.route('/joke', methods=['GET'])  # En get request for joke API'en
 def jokes():
@@ -42,5 +53,7 @@ def visma():
 
 
 if __name__ == '__main__':
+
     # starter app i debug mode som gjør at den reloader serveren on save
     app.run(port=5000, debug=True, host="0.0.0.0")
+
