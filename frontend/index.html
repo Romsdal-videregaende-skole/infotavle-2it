@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infotavle</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+
 </head>
 <body onload="startTime()" class="Section_top">
     <div id="clock"></div>
@@ -20,8 +21,10 @@
         </div>
     </div>
     <button onclick="getJoke()">Clickme</button>
-
-    <button onclick="move()" class="Bottom"></button>
+    <div class="bottom-div">
+        <button onclick="move()" class="Bottom"></button>
+    </div>
+    
 </body>
 <script src="script/clock.js"></script>
 <script src="script/jokes.js"></script>
