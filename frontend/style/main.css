@@ -45,9 +45,6 @@ body {
     background-color: #000000;
     border-radius: 10px;
     overflow: hidden;
-
-    
-
 }
 
 #loading-bar{
@@ -58,6 +55,10 @@ body {
 
 button {
     color: white;
+}
+
+#temp {
+    margin-left: 3%;
 }
 
 .Bottom{
