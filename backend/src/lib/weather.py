@@ -8,5 +8,5 @@ def temperature():
     print (response)
     return
 
-if __name__ == __main__:
-    temperature()
+#if __name__ == __main__:
+    #temperature()
