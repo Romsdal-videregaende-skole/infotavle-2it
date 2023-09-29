@@ -8,5 +8,3 @@ def temperature():
     print (response['currentConditions']['temp'])
     return
 
-if __name__ == '__main__':
-    temperature()
