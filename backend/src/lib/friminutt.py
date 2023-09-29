@@ -23,7 +23,7 @@ def liste(friminutt):
             time_difference = test - current_datetime
             total_minutes_until_recess = time_difference.total_seconds() / 60
             percentage_difference = (total_minutes_until_recess / 40) * 100
-            return percentage_difference
+            return friminutt[x], percentage_difference
 
         
 
