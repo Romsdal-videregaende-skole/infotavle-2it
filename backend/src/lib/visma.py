@@ -74,7 +74,10 @@ def getVisma():
 
     times = []
     parent_div = soup.find(
-        'div', class_='Timetable-TimetableDays_day', recursive=True)
+        'div', class_='active Timetable-TimetableDays_day', recursive=True)
+    if not parent_div:
+        parent_div = soup.find(
+            'div', class_='Timetable-TimetableDays_day', recursive=True)
     if parent_div:
         # Find all <h4> elements within the parent <div>
         h4_tags = parent_div.find_all('h4')
