@@ -44,6 +44,7 @@ def getVisma():
     driver.get("https://romsdal-vgs.inschool.visma.no/")
 
     # Locate the login button by its name and click it
+
     time.sleep(1)
 
     button = waitUntil(By.ID, "onetrust-accept-btn-handler")
