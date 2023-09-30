@@ -7,7 +7,7 @@ from src.lib.visma import getVisma, fetchAPI
 import json
 
 app = Flask(__name__, template_folder="../frontend")
-CORS(app)
+CORS(app, resources={r"api/*": {"origins": "*"}})
 
 
 @app.route('/')
@@ -20,14 +20,14 @@ def serve_static(filename):
     return send_from_directory("../frontend", filename)
 
 
-@app.route('/joke', methods=['GET'])
+@app.route('/api/joke', methods=['GET'])
 def jokes():
 
     res = joke.getJoke()
     return res
 
 
-@app.route('/visma', methods=['GET'])
+@app.route('/api/visma', methods=['GET'])
 def visma():
 
     timeplan = fetchAPI()
