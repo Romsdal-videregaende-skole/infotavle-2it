@@ -3,7 +3,7 @@ from flask_cors import CORS
 from datetime import datetime
 
 from src.lib import joke
-from src.lib.visma import getVisma
+from src.lib.visma import getVisma, fetchAPI
 import json
 
 app = Flask(__name__, template_folder="../frontend")
@@ -29,11 +29,7 @@ def jokes():
 
 @app.route('/visma', methods=['GET'])
 def visma():
-    def fetchAPI():
-        timeplan = getVisma()
-        if timeplan is None:
-            fetchAPI()
-        return timeplan
+
     timeplan = fetchAPI()
     timer = {}
     for i in range(len(timeplan)):
