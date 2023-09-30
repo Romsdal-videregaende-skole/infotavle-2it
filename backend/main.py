@@ -3,7 +3,7 @@ from flask_cors import CORS
 from datetime import datetime
 
 from src.lib import joke
-from src.lib.visma import getVisma, fetchAPI
+from src.lib.visma import fetchAPI
 import json
 
 app = Flask(__name__, template_folder="../frontend")
@@ -22,7 +22,6 @@ def serve_static(filename):
 
 @app.route('/api/joke', methods=['GET'])
 def jokes():
-
     res = joke.getJoke()
     return res
 
