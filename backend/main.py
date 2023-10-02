@@ -1,7 +1,7 @@
 from flask import Flask, send_from_directory, url_for, render_template
 from flask_cors import CORS
 from datetime import datetime
-from src.lib import joke
+from src.lib import joke, friminutt
 from src.lib.visma import fetchAPI
 import json
 
