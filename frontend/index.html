@@ -6,15 +6,23 @@
     <title>Infotavle</title>
     <link rel="stylesheet" href="style/main.css">
 </head>
-<body onload="startTime()">
+<body onload="startTime()" class="Section_top">
     <div id="clock"></div>
+    <div class="dato-container">
+
+
+    </div>
     <div class="vær">
-        <p>Temperatur nå:</p>
+        <p>Temperatur nå:</p> <p id="temp">18°C</p>
     </div>
+
     <div class="nesteTime">
-        <p>Neste time:</p>
+        <p>Neste time</p>
+    
         <p id="fag">YFF</p>
-    </div>
+
+        <p id="lærer">Sten</p>
+    </div> 
     <div class="jokes">
         <p id="setup"></p>
         <p id="punchline"></p>
@@ -23,7 +31,7 @@
         <div id="loading-bar"> 
         </div>
     </div>
-
+    <button onclick="getJoke()">Clickme</button>
 
     <button onclick="move()" class="Bottom"></button>
 </body>
