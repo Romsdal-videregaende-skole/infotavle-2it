@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from encryption import encrypter
 from functools import cache
 from bs4 import BeautifulSoup
 import time
@@ -23,6 +24,7 @@ def getVisma():
         wait.until(EC.visibility_of_element_located((byType, item)))
         revealed = driver.find_element(byType, item)
         print(f"Waited for {item}")
+
         return revealed
 
     dotenv.load_dotenv()
@@ -38,14 +40,13 @@ def getVisma():
     options.add_argument('start-maximized')
 
     driver = webdriver.Chrome(service=service, options=options)
-    print("started")
+    print("started") #Debug
 
     # Visit the desired URL
     driver.get("https://romsdal-vgs.inschool.visma.no/")
 
     # Locate the login button by its name and click it
-
-    time.sleep(1)
+    time.sleep(1) #This has to be here
 
     button = waitUntil(By.ID, "onetrust-accept-btn-handler")
     button.click()
@@ -54,7 +55,7 @@ def getVisma():
     login.click()
 
     Username = os.environ.get('feidenavn')
-    Password = os.environ.get('feidepassord')
+    Password = encrypter.decrypt(os.environ.get('feidepassord'))
     print("logging in")
 
     username = driver.find_element(By.ID, "username")
@@ -64,8 +65,9 @@ def getVisma():
     password.send_keys(Password)
 
     driver.find_element(By.CLASS_NAME, "button-primary").click()
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(2.5)
     print("parsing html")
+
     waitUntil(By.CLASS_NAME, "Timetable-TimetableDays_day")
 
     page_source = driver.page_source
@@ -75,7 +77,13 @@ def getVisma():
 
     times = []
     parent_div = soup.find(
-        'div', class_='Timetable-TimetableDays_day', recursive=True)
+        'div', class_='active Timetable-TimetableDays_day', recursive=True)
+    
+    if not parent_div:
+        parent_div = soup.find(
+            'div', class_='Timetable-TimetableDays_day', recursive=True)
+
+
     if parent_div:
         # Find all <h4> elements within the parent <div>
         h4_tags = parent_div.find_all('h4')

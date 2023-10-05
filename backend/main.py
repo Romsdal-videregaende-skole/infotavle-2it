@@ -6,7 +6,7 @@ from src.lib.visma import fetchAPI
 import json
 
 app = Flask(__name__, template_folder="../frontend")
-CORS(app, resources={r"api/*": {"origins": "*"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}}) #Initialize flask Cors (Cross Origin Resource Sharing) on only the /api/* URI endpoints
 
 @app.route('/')  # Index path
 def index():
