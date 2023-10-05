@@ -20,6 +20,7 @@ class encrypter():
 
 if __name__ == "__main__":
     ec = encrypter()
+    e = ec.encrypt("lashav19")
     p = ec.decrypt(os.getenv("feidepassord"))
-    print(p)
+    print(e)
     

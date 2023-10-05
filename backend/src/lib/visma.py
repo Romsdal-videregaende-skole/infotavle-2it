@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from encryption import encrypter
+import kryptering
 from functools import cache
 from bs4 import BeautifulSoup
 import time
@@ -54,7 +54,9 @@ def getVisma():
     login = waitUntil(By.ID, "login-with-feide-button")
     login.click()
 
-    Username = os.environ.get('feidenavn')
+
+    encrypter = kryptering.encrypter()
+    Username = encrypter.decrypt(os.environ.get('feidenavn'))
     Password = encrypter.decrypt(os.environ.get('feidepassord'))
     print("logging in")
 
