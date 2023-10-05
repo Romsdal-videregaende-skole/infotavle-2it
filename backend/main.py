@@ -8,6 +8,7 @@ import json
 app = Flask(__name__, template_folder="../frontend")
 CORS(app, resources={r"/api/*": {"origins": "*"}}) #Initialize flask Cors (Cross Origin Resource Sharing) on only the /api/* URI endpoints
 
+
 @app.route('/')  # Index path
 def index():
     return render_template("index.html")
@@ -18,19 +19,20 @@ def index():
 def serve_static(filename):
     return send_from_directory("../frontend", filename)
 
+
 @app.route('/friminutt')
 def getFriminutt():
-    friminutt_start = ["9:5", "9:55", "10:55", "11:45", "13:00", "13:50", "14:40"]
+    friminutt_start = ["9:5", "9:55", "10:55",
+                       "11:45", "13:00", "13:50", "14:40"]
     friminutter = friminutt.liste(friminutt_start)
     print(friminutter)
     return {"friminutt": friminutter[1]/100}
 
-  
+
 @app.route('/api/joke', methods=['GET'])
 def jokes():
     res = joke.getJoke()
     return res
-
 
 
 @app.route('/api/visma', methods=['GET'])
@@ -47,4 +49,3 @@ if __name__ == '__main__':
 
     # starter app i debug mode som gjør at den reloader serveren on save
     app.run(port=5000, debug=True, host="0.0.0.0")
-
