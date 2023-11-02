@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateLoadingBar();
 
   // Subsequent calls every second
-  setInterval(updateLoadingBar, 5000);
+  setInterval(updateLoadingBar, 1000);
 });
 
 // Function to fetch data from the API
@@ -33,7 +33,7 @@ function updateLoadingBar() {
       
       // Ensure the value is never more than 100
       apiResult = Math.min(100, apiResult);
-      
+      console.log(apiResult)
       // Jump directly to the new value without smooth animation
       jumpTo(apiResult);
     }
