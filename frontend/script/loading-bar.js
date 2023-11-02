@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateLoadingBar();
 
   // Subsequent calls every second
-  setInterval(updateLoadingBar, 1000);
+  setInterval(updateLoadingBar, 10000);
 });
 
 // Function to fetch data from the API

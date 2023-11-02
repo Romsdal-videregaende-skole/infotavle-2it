@@ -5,7 +5,7 @@ function startTime() {
 
     m = checkTime(m);
     document.getElementById('clock').innerHTML =  h + ":" + m;
-    setTimeout(startTime, 1000);
+    setTimeout(startTime, 20000);
   }
   
   function checkTime(i) {
