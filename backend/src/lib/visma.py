@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import src.lib.kryptering as kryptering
+from src.lib.kryptering import encrypter
 from functools import cache
 from bs4 import BeautifulSoup
 import time
