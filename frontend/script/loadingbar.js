@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Function to fetch data from the API
 async function fetchData() {
   try {
-    const response = await fetch('http://192.168.1.32:5000/friminutt');
+    const response = await fetch('http://127.0.0.1:5000/api/friminutt');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

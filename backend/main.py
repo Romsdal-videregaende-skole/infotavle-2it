@@ -21,7 +21,7 @@ def serve_static(filename):
     return send_from_directory("../frontend", filename)
 
 
-@app.route('/friminutt', methods=['GET'])
+@app.route('/api/friminutt', methods=['GET'])
 def getFriminutt():
     
     def liste(friminutt):
