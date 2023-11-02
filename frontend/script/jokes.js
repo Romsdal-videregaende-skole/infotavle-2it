@@ -1,7 +1,7 @@
 setInterval(async function getJoke(){
     document.getElementById("setup").innerHTML = "";
     document.getElementById("punchline").innerHTML = "";
-    const api = new URL('http://127.0.0.1:5000/api/joke')
+    const api = new URL('http://127.0.0.1:8080/api/joke')
 
     const response = await fetch(api)
 
