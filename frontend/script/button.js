@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateLoadingBar();
 
   // Subsequent calls every second
-  setInterval(updateLoadingBar, 1000);
+  setInterval(updateLoadingBar, 5000);
 });
 
 // Function to fetch data from the API
@@ -17,7 +17,6 @@ async function fetchData() {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    console.log(data);
     return data.friminutt || 0; // Use the value of "friminutt" or default to 0
   } catch (error) {
     console.error('Error fetching data:', error);

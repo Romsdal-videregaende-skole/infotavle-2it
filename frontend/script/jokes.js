@@ -6,15 +6,13 @@ setInterval(async function getJoke(){
 
     const data = await response.json()
 
-    if (data.Setup !== ""){
-        console.log(data.Setup, data.Punchline)
-    } else{
-        console.log(data.Punchline)
+    if (data.Setup !== null){
+       
+        document.getElementById("setup").innerHTML = data.Setup;
     }
 
-    var jSetup= JSON.stringify(data.Setup)       
-    var jPunchline = JSON.stringify(data.Punchline)
+    document.getElementById("punchline").innerHTML = data.Punchline
 
-    document.getElementById("setup").innerHTML = jSetup;
-    document.getElementById("punchline").innerHTML = jPunchline
+    
+
 },15000)
