@@ -6,18 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
   updateLoadingBar();
 
   // Subsequent calls every second
-  setInterval(updateLoadingBar, 1000);
+  setInterval(updateLoadingBar, 10000);
 });
 
 // Function to fetch data from the API
 async function fetchData() {
   try {
-    const response = await fetch('http://192.168.1.32:5000/friminutt');
+    const response = await fetch('http://127.0.0.1:8080/api/friminutt');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    console.log(data);
     return data.friminutt || 0; // Use the value of "friminutt" or default to 0
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -34,7 +33,7 @@ function updateLoadingBar() {
       
       // Ensure the value is never more than 100
       apiResult = Math.min(100, apiResult);
-      
+      console.log(apiResult)
       // Jump directly to the new value without smooth animation
       jumpTo(apiResult);
     }
