@@ -6,7 +6,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import src.lib.kryptering as kryptering
+try:
+    import src.lib.kryptering as kryptering
+except ImportError:
+    import kryptering
+
 from functools import cache
 from bs4 import BeautifulSoup
 import time
@@ -14,12 +18,18 @@ import os
 import dotenv
 
 
+lærere = []
+lessons = []
+timestart = []
+
+
+
 @cache
 def getVisma():
 
     def waitUntil(byType: By, item: str):
 
-        wait = WebDriverWait(driver, timeout=2)
+        wait = WebDriverWait(driver, timeout=10)
 
         wait.until(EC.visibility_of_element_located((byType, item)))
         revealed = driver.find_element(byType, item)
@@ -77,18 +87,27 @@ def getVisma():
 
     # Replace with the actual class of the parent div
 
-    times = []
     parent_div = soup.find(
         'div', class_='active Timetable-TimetableDays_day', recursive=True)
+
     if not parent_div:
+
         parent_div = soup.find(
             'div', class_='Timetable-TimetableDays_day', recursive=True)
+
     if parent_div:
+                
         # Find all <h4> elements within the parent <div>
         h4_tags = parent_div.find_all('h4')
 
-        # Extract and print the text from each <h4> element
+        item = parent_div.find('div', class_="Timetable-Items", recursive=True)
+        for teacher in item:
+            items=teacher.find("div", {"teachername": True})
+            teacher_name = items['teachername']
+            lærere.append(teacher_name)
+
         for h4_tag in h4_tags:
+
             h4_text = h4_tag.get_text()
             words = h4_text.split()
             course_name = words[0]
@@ -96,21 +115,22 @@ def getVisma():
             time_info = h4_text.split("klokken")
 
             lesson_start = time_info[1].split()
-            times.append([course_name, lesson_start[0]])
+            
+            lessons.append(course_name)
+            timestart.append(lesson_start[0])
+
+
+        # Extract and print the text from each <h4> element
+
+
+    final = {i:[j,k] for i,j,k in zip(timestart, lessons, lærere)}
     driver.close()
-    return times
 
+    return final
 
-def fetchAPI():
-    timeplan = getVisma()
-    if timeplan is None:
-        fetchAPI()
-    return timeplan
 
 
 if __name__ == "__main__":
-    timeplan = fetchAPI()
-    timer = {}
-    for i in range(len(timeplan)):
-        timer[timeplan[i][1]] = timeplan[i][0]
-    print(timer)
+    timeplan = getVisma()
+
+    print(timeplan)
