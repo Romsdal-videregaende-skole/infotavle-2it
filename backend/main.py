@@ -4,7 +4,7 @@ from flask_cors import CORS
 from datetime import datetime
 from src.lib import joke, friminutt
 from src.lib.visma import getVisma
-import json
+import json, datetime
 
 app = Flask(__name__, template_folder="../frontend")
 CORS(app, resources={r"/api/*": {"origins": "*"}}) #Initialize flask Cors (Cross Origin Resource Sharing) on only the /api/* URI endpoints
@@ -60,6 +60,22 @@ def jokes():
 @app.route('/api/visma', methods=['GET'])
 def visma():
     return getVisma()
+
+
+@app.route('/api/time', methods=['GET'])
+def getLesson():
+
+
+    timeliste = getVisma()
+    current_time = datetime.datetime.now().time()
+
+    for tid in timeliste:
+        today = datetime.datetime.now()
+        current_time = datetime.datetime.now().time()
+        timenow = str(f"{current_time.hour}:{current_time.minute}")
+        if timenow < tid:
+            print(tid)
+            return tid
 
 
 if __name__ == '__main__':
