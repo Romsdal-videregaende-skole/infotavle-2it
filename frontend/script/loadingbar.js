@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Function to fetch data from the API
 async function fetchData() {
   try {
-    const response = await fetch('http://127.0.0.1:8080/api/friminutt');
+    const response = await fetch('/api/friminutt');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

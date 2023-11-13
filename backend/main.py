@@ -3,7 +3,7 @@ from flask import Flask, send_from_directory, url_for, render_template
 from flask_cors import CORS
 from datetime import datetime
 from src.lib import joke, friminutt
-from src.lib.visma import fetchAPI
+from src.lib.visma import getVisma
 import json
 
 app = Flask(__name__, template_folder="../frontend")
@@ -59,12 +59,7 @@ def jokes():
 
 @app.route('/api/visma', methods=['GET'])
 def visma():
-
-    timeplan = fetchAPI()
-    timer = {}
-    for i in range(len(timeplan)):
-        timer[timeplan[i][1]] = timeplan[i][0]
-    return timer
+    return getVisma()
 
 
 if __name__ == '__main__':
