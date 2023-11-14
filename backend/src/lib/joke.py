@@ -5,7 +5,7 @@ import json, requests
 
 def getJoke():
 
-    request = requests.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,racist,explicit')
+    request = requests.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit')
     joke = json.loads(request.text)
 
     if joke.get('joke') is not None:
