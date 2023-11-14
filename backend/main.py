@@ -61,9 +61,8 @@ def jokes():
 def visma():
     return getVisma()
 
-@app.route('/api/temperature', methods=['GET'])
-def hent_temperatur():
-    return temperatur.getTemp()
+
+
 if __name__ == '__main__':
 
     # starter app i debug mode som gjør at den reloader serveren on save

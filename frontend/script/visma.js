@@ -1,20 +1,20 @@
 
 document.addEventListener("DOMContentLoaded", function (){
+  getTemperature()
+  getVisma()
 
-    getVisma()
 })
-
 
 
 
 function updateText(data){
     console.log("Updating text");
+    console.log(data)
     var nesteTime = document.getElementById("fag")
     var teacher = document.getElementById("lærer")
     nesteTime.textContent = data[getCurrentTime()][0]
     teacher.textContent = data[getCurrentTime()][1]
-    console.log(data[getCurrentTime()][0]);
-    console.log(data[getCurrentTime()][1]);
+
 
 }
 
