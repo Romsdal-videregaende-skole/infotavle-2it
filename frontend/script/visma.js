@@ -1,6 +1,5 @@
 
 document.addEventListener("DOMContentLoaded", function (){
-  getTemperature()
   getVisma()
 
 })
