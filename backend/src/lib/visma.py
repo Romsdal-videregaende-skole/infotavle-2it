@@ -111,6 +111,8 @@ def getVisma():
             h4_text = h4_tag.get_text()
             words = h4_text.split()
             course_name = words[0]
+            if course_name == "Yrkesfaglig":
+                course_name = "YFF"
 
             time_info = h4_text.split("klokken")
 
