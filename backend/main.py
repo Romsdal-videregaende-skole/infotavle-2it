@@ -2,7 +2,7 @@ from flask import Flask, send_from_directory, render_template
 from flask import Flask, send_from_directory, url_for, render_template
 from flask_cors import CORS
 from datetime import datetime
-from src.lib import joke, friminutt
+from src.lib import joke, friminutt, temperatur
 from src.lib.visma import getVisma
 import json
 
@@ -61,8 +61,9 @@ def jokes():
 def visma():
     return getVisma()
 
-
-
+@app.route('/api/temperature', methods=['GET'])
+def hent_temperatur():
+    return temperatur.getTemp()
 if __name__ == '__main__':
 
     # starter app i debug mode som gjør at den reloader serveren on save

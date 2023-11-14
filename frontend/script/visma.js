@@ -13,6 +13,8 @@ function updateText(data){
     var teacher = document.getElementById("lærer")
     nesteTime.textContent = data[getCurrentTime()][0]
     teacher.textContent = data[getCurrentTime()][1]
+    console.log(data[getCurrentTime()][0]);
+    console.log(data[getCurrentTime()][1]);
 
 }
 
@@ -62,6 +64,7 @@ function getCurrentTime(){
       
       // Output the result
       if (nextItem) {
+        console.log(nextItem, " ", itemKey)
         return key
       } else {
         console.error("There are no more items");
