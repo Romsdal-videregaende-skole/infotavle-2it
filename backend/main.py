@@ -62,6 +62,7 @@ def visma():
     return getVisma()
 
 
+
 if __name__ == '__main__':
 
     # starter app i debug mode som gjør at den reloader serveren on save
