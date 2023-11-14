@@ -19,7 +19,7 @@ def getTemp():
     else:
         print(f'Error: {response.status_code} - {response.text}')
         data = response.text
-        print(data.get("body"))
+        print()
     return
 
 if __name__ == '__main__':

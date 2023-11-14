@@ -22,5 +22,5 @@ for tid in timeliste:
     today = datetime.datetime.now()
     current_time = datetime.datetime.now().time()
     timenow = str(f"{current_time.hour}:{current_time.minute}")
-if timenow > tid:
-  print(tid)
+    if timenow < tid:
+      print(tid)
