@@ -2,7 +2,10 @@ setInterval(async function getJoke(){
     document.getElementById("setup").innerHTML = "";
     document.getElementById("punchline").innerHTML = "";
 
-    const response = await fetch("/api/joke")
+
+
+    const response = await fetch('/api/joke')
+
 
     const data = await response.json()
 

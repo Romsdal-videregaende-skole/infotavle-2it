@@ -6,12 +6,14 @@
     <title>Infotavle</title>
     <link rel="stylesheet" href="style/main.css">
 </head>
-<body onload="startTime()" class="Section_top">
+<body onload="startTime(), startdate()" class="Section_top">
     <div id="clock"></div>
-    <div class="dato-container">
 
 
-    </div>
+
+    <div id="dateDisplay"></div>
+
+
     <div class="vær">
         <p>Temperatur nå:</p> <p id="temp">18°C</p>
     </div>
@@ -36,6 +38,7 @@
 
 <script src="script/visma.js"></script>
 <script src="script/clock.js"></script>
+<script src="script/date.js"></script>
 <script src="script/jokes.js"></script>
 <script src="script/loadingbar.js"></script>
 
