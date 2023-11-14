@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function (){
 
 function updateText(data){
     console.log("Updating text");
-    console.log(data)
     var nesteTime = document.getElementById("fag")
     var teacher = document.getElementById("lærer")
     nesteTime.textContent = data[getCurrentTime()][0]

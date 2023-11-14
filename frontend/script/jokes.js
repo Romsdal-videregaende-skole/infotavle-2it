@@ -18,4 +18,4 @@ setInterval(async function getJoke(){
 
     
 
-},15000)
+},150000)
