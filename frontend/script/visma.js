@@ -4,17 +4,25 @@ document.addEventListener("DOMContentLoaded", function (){
 
 })
 
+function textUpdate(data) {
+  console.log("Updating text");
+  console.log(getCurrentTime());
 
+  var nesteTime = document.getElementById("fag");
+  var teacher = document.getElementById("lærer");
 
-function updateText(data){
-    console.log("Updating text");
-    var nesteTime = document.getElementById("fag")
-    var teacher = document.getElementById("lærer")
-    nesteTime.textContent = data[getCurrentTime()][0]
-    teacher.textContent = data[getCurrentTime()][1]
+  if (getCurrentTime() !== null) {
+      console.log("Setting text");
 
+      nesteTime.textContent = data[getCurrentTime()][0];
+      teacher.textContent = data[getCurrentTime()][1];
+  } else {
 
+      nesteTime.textContent = "";
+      teacher.textContent = "Fri";
+  }
 }
+
 
 function getVisma() {
     console.info("Fetching");
@@ -25,7 +33,7 @@ function getVisma() {
 function fetchVismaData() {
     fetch('/api/visma')
         .then(response => response.json())
-        .then(data => updateText(data))
+        .then(data => textUpdate(data, console.log(data)))
         .catch(error => console.error("Error fetching data:", error));
 }
 
