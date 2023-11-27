@@ -18,9 +18,8 @@ import os
 import dotenv
 
 
-lærere = []
-lessons = []
-timestart = []
+
+
 
 
 
@@ -59,6 +58,7 @@ def getVisma():
     time.sleep(.5)
 
     button = waitUntil(By.ID, "onetrust-accept-btn-handler")
+
     button.click()
 
     login = waitUntil(By.ID, "login-with-feide-button")
@@ -100,34 +100,25 @@ def getVisma():
         # Find all <h4> elements within the parent <div>
         h4_tags = parent_div.find_all('h4')
 
-        item = parent_div.find('div', class_="Timetable-Items", recursive=True)
-        for teacher in item:
+        teacher_item = parent_div.find('div', class_="Timetable-Items", recursive=True)
+        teachers = []
+
+        for teacher in teacher_item:
+
             items=teacher.find("div", {"teachername": True})
             teacher_name = items['teachername']
-            lærere.append(teacher_name)
+            teachers.append(teacher_name)
+        
+        
+        lessons = [h4tag.get_text().split()[0] for h4tag in h4_tags]
 
-        for h4_tag in h4_tags:
+        timestart = [h4tag.get_text().split('klokken')[1].split()[0] for h4tag in h4_tags]
+        
 
-            h4_text = h4_tag.get_text()
-            words = h4_text.split()
-            course_name = words[0]
-
-
-            time_info = h4_text.split("klokken")
-
-            lesson_start = time_info[1].split()
-            
-            lessons.append(course_name)
-            timestart.append(lesson_start[0])
-
-
-        # Extract and print the text from each <h4> element
-
-
-    final = {i:[j,k] for i,j,k in zip(timestart, lessons, lærere)}
+    dump = {i:[j,k] for i,j,k in zip(timestart, lessons, teachers)}
     driver.close()
 
-    return final
+    return dump
 
 
 
