@@ -62,8 +62,23 @@ python3 -m pip install -r requirements.txt
 
 ## Starting av webserveren
 
+Helst så bør man bruke en [WSGI](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface) server, for å gjøre dette, men <br>
+så lenge serveren bare blir brukt på skolen med minimal trafikk, så skal det gå bra å runne i plain python.
+
+---
+
+**Windows**
+
 ```
 python backend/main.py
+```
+
+---
+
+**Linux**
+
+```bash
+python3 backend/main.py
 ```
 
 ## TODO
