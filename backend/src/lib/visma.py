@@ -1,5 +1,6 @@
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
+import operator
 
 
 def get_formatted_date():
@@ -8,6 +9,13 @@ def get_formatted_date():
 
     # Format the date as "DD/MM/YYYY"
     formatted_date = current_date.strftime("%d/%m/%Y")
+    day_name = current_date.strftime("%A")
+
+    # Check if the day is Saturday or Sunday
+    if day_name.lower() == "saturday" or day_name.lower() == "sunday":
+        # If it's a weekend, add 2 days to the current date
+        new_date = current_date + timedelta(days=2)
+        formatted_date = new_date.strftime("%d/%m/%Y")
 
     return formatted_date
 
@@ -26,21 +34,22 @@ HEADER = {
 req = requests.get(ENDPOINT, headers=HEADER)
 
 
-
-
 def getVisma():
     resp = {}
     response = req.json()
-
     timetable = response.get('timetableItems')
+
     for item in range(len(timetable)):
-        if timetable[item].get('date') == get_formatted_date():
-
+        if timetable[item].get('date') == formatted_date:
             items = timetable[item]
-
             resp[items.get('startTime')] = [
                 items.get('subject'), items.get('teacherName'), items.get('endTime')]
-    return resp
+
+    # Sort the dictionary by keys in ascending order
+    sorted_resp = dict(sorted(resp.items(), key=operator.itemgetter(0)))
+
+    return sorted_resp
+
 
 if __name__ == '__main__':
     print(getVisma())
