@@ -72,4 +72,4 @@ def getWeather():
 if __name__ == '__main__':
 
     # starter app i debug mode som gjør at den reloader serveren on save
-    app.run(port=5500, debug=True, host="0.0.0.0")
+    app.run(port=8080, debug=True, host="0.0.0.0")
