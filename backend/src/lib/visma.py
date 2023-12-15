@@ -1,128 +1,46 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-try:
-    import src.lib.kryptering as kryptering
-except ImportError:
-    import kryptering
-
-from functools import cache
-from bs4 import BeautifulSoup
-import time
-import os
-import dotenv
+import requests
+from datetime import datetime
 
 
+def get_formatted_date():
+    # Get the current date
+    current_date = datetime.now()
+
+    # Format the date as "DD/MM/YYYY"
+    formatted_date = current_date.strftime("%d/%m/%Y")
+
+    return formatted_date
+
+
+# Call the function and print the result
+formatted_date = get_formatted_date()
+
+ID = 9390648
+
+
+ENDPOINT = f"https://romsdal-vgs.inschool.visma.no/control/timetablev2/learner/{ID}/fetch/ALL/0/current?forWeek={formatted_date}&extra-info=true&types=LESSON,EVENT,ACTIVITY,SUBSTITUTION&_=1702672538858"
+HEADER = {
+    "Cookie": "XSRF-TOKEN=cb555d07-9607-432e-b15e-a663e90ca59a; JSESSIONID=1A8D58AED5969079D0F462CD9BEF6194-n1; Authorization=eyJ0eXAiOiJKV1QiLCJ0b2tlblR5cGUiOiJBQ0NFU1MiLCJhbGciOiJSUzI1NiJ9.eyJzZXJpYWxpemVkVXNlckRldGFpbHMiOiJINHNJQUFBQUFBQUEvNzFRN1VyRFFCQjhsWEsvVDdtdmJPN3l5eUpGaFJJbDRnK1JJa2R6YVlQSnBlUnFwWWlQNDVQNFl1NjJXbndDQ1VkdVpuZm1kdmFkYmZ4MnpRckdPSHU5cVZraHJkRTVXTWZaTmlMS2hNUnJFMHBzNlh4YSs1MTBGLzNZN0x1WGNCNEhWTlZVbXZ1VXd1VGE3MkpJeUFWV2JNZlhnQjVrNmJRVFlDeG55K24rOElRR3E0QXpmNFQwdEwrZjduODFkYk5COHJJalN6THJCb1J4T0N0dkVjUTU2amxiQlNMTFlYenplMlFUMll4RG4ycmZuZTFXcE9vcnBLcmIrZXg1UHB0VzVheWlzZnBqaWhRdTFvZFJ6OXZZVUFiL3VNU0tFa3JqTVFmaUI1TTVCYXlPNXBOZFc0Y3hyTDQrUTZ6REpMME1YYUNXUGwzOW5XZDV4NHJHZHduVHJFN3JRYjRoY05wU1gxSUlsK1ZPYTVFanNia2ZUN3JZNHZxWnhNMEpjQ3FYZ3VvZXd5dVFTa3FGano2Y210dWFWdFlFSEk3YWJ1ckVpaWNqSEhESUFBd1hQRU9GRWxibzNPVFdjQWxLWkVRN0tZemcwbVZVem9EbkZvd0Jib1FDWnlSZ0NSZUNqUkswUGZ5VjVWcmg1VisrQllZSlk5K20xQTR4SFdNdFByNEJBN2NZejdRQ0FBQT0iLCJpZCI6IjQ3ODY2YWZmLTA1N2UtNGFhNi05NDFmLTU4YjhmMTFhZGI4ZiIsImlzTW9iaWxlIjpmYWxzZSwiZXhwIjoxNzAyNjcyNzY2LCJwYXJ0UmVmIjoiMGU2Zjg3Y2FhMjI3OTAxMmQ3NmVlMzZmMGZmM2Y1MjMiLCJpc1N1cHBvcnRVc2VyIjpmYWxzZSwiaWF0IjoxNzAyNjcyNDY2LCJ0ZW5hbnQiOjE1MDE5LCJzYW1sQ3JlZGVudGlhbHNSZWZJZCI6ImZmZGQwY2M4LWY3NGEtNDUyMi1iZTIwLTYyMzVlMTJkNzVmYzoyMDIzLTEyLTE1VDIwOjI4OjM5LjIzMzE2NjU1MyIsInRva2VuR2VuZXJhdGlvblZlcnNpb25JZCI6IjU5OTM4MzVmYTE4NzBiMjY0MWY0N2I4NmI2NmE1MmUxZTYwZWZhYjY3YmU5M2I2NDVkNmFjMzE0Mjc3NzI5ZWIifQ.V3iCc5jgO6LjBdLWknmQrJbauxCjmuBO3PLr_5R6h4tYerpyQkW6ohDhH6FnJUg4Bq9yXpWoAcBlKPBozq-GL_AW2SqFUtPmMtdyEvltzryAtNsNZXZDDwHEq-tESPavKJ2mgF_kdJdr5voZffWT6mDEpnxt4wPcQk0OdIf2fGN0dKYnB7wt6Un7wl6JdWpjDSDfXIQy7mELu5ePzY3pgm0jT8XOMUgayUM8ExvykC0GXhzeqs13_77MwnE-UE8lvJ3S7Emn0IhIxIXSWBxmUG6kTR7hOT81xNlfdves95xg-KCQ6lAJZtQ-9iEFA0MxbQp5pZJEffj_HQjhpZUsqQ; SameSite=None; pdfcc=7; AWSALB=/wF7Lowz+iQIXD6DzPNINBc89mpPJdTRBi4by+keQb+njXmrBo74Soqjj5StEF2VP5t0nrhb7WbbgEK13von0ZwutVbBDbS9Q6pkmhmk+lI0EG9DEJWQw35xGCNT; AWSALBCORS=/wF7Lowz+iQIXD6DzPNINBc89mpPJdTRBi4by+keQb+njXmrBo74Soqjj5StEF2VP5t0nrhb7WbbgEK13von0ZwutVbBDbS9Q6pkmhmk+lI0EG9DEJWQw35xGCNT"
+}
+
+req = requests.get(ENDPOINT, headers=HEADER)
 
 
 
 
-
-@cache
 def getVisma():
+    resp = {}
+    response = req.json()
 
-    def waitUntil(byType: By, item: str):
+    timetable = response.get('timetableItems')
+    for item in range(len(timetable)):
+        if timetable[item].get('date') == get_formatted_date():
 
-        wait = WebDriverWait(driver, timeout=10)
+            items = timetable[item]
 
-        wait.until(EC.visibility_of_element_located((byType, item)))
-        revealed = driver.find_element(byType, item)
-        print(f"Waited for {item}")
+            resp[items.get('startTime')] = [
+                items.get('subject'), items.get('teacherName'), items.get('endTime')]
+    return resp
 
-        return revealed
-
-    dotenv.load_dotenv()
-
-    # Set the path to the ChromeDriver executable using the Service class
-    chrome_driver_path = ChromeDriverManager().install()
-    service = Service(chrome_driver_path)
-
-    # Create a Chrome driver with the configured service
-
-    options = Options()
-    options.add_argument("--headless")  # Runs Chrome in headless mode.
-    options.add_argument('start-maximized')
-
-    driver = webdriver.Chrome(service=service, options=options)
-    print("started") #Debug
-
-    # Visit the desired URL
-    driver.get("https://romsdal-vgs.inschool.visma.no/")
-
-    # Locate the login button by its name and click it
-    time.sleep(.5)
-
-    button = waitUntil(By.ID, "onetrust-accept-btn-handler")
-
-    button.click()
-
-    login = waitUntil(By.ID, "login-with-feide-button")
-    login.click()
-
-
-    encrypter = kryptering.encrypter()
-    Username = encrypter.decrypt(os.environ.get('feidenavn'))
-    Password = encrypter.decrypt(os.environ.get('feidepassord'))
-    print("logging in")
-
-    username = driver.find_element(By.ID, "username")
-    username.send_keys(Username)
-
-    password = driver.find_element(By.ID, "password")
-    password.send_keys(Password)
-
-    driver.find_element(By.CLASS_NAME, "button-primary").click()
-    driver.implicitly_wait(2.5)
-    print("parsing html")
-
-    waitUntil(By.CLASS_NAME, "Timetable-TimetableDays_day")
-
-    page_source = driver.page_source
-    soup = BeautifulSoup(page_source, 'html.parser')
-
-    # Replace with the actual class of the parent div
-
-    parent_div = soup.find(
-        'div', class_='active Timetable-TimetableDays_day', recursive=True)
-
-    if not parent_div:
-
-        parent_div = soup.find(
-            'div', class_='Timetable-TimetableDays_day', recursive=True)
-
-    if parent_div:
-                
-        # Find all <h4> elements within the parent <div>
-        h4_tags = parent_div.find_all('h4')
-
-        teacher_item = parent_div.find('div', class_="Timetable-Items", recursive=True)
-        teachers = []
-
-        for teacher in teacher_item:
-
-            items=teacher.find("div", {"teachername": True})
-            teacher_name = items['teachername']
-            teachers.append(teacher_name)
-        
-        
-        lessons = [h4tag.get_text().split()[0] for h4tag in h4_tags]
-
-        timestart = [h4tag.get_text().split('klokken')[1].split()[0] for h4tag in h4_tags]
-        
-
-    dump = {i:[j,k] for i,j,k in zip(timestart, lessons, teachers)}
-    driver.close()
-
-    return dump
-
-
-
-if __name__ == "__main__":
-    timeplan = getVisma()
-
-    print(timeplan)
+if __name__ == '__main__':
+    print(getVisma())
