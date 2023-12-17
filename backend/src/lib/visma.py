@@ -40,8 +40,6 @@ def getVisma(URL):
     # Create a Chrome driver with the configured service
 
     options = Options()
-    options.add_argument('--headless')
-    options.add_argument('start-maximized')
 
     driver = webdriver.Chrome(service=service, options=options)
     print("started")  # Debug
@@ -59,9 +57,6 @@ def getVisma(URL):
     username.send_keys(Username)
     password = driver.find_element(By.ID, "password")
     password.send_keys(Password)
-
-
-
 
     driver.find_element(By.CLASS_NAME, "button-primary").click()
     print("parsing html")
