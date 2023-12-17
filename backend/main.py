@@ -61,7 +61,7 @@ def jokes():
 
 @app.route('/api/visma', methods=['GET'])
 def visma():
-    return getVisma()
+    return getVisma("romsdal-vgs.inschool.visma.no/Login.jsp?idp=feide")
 
 
 @app.route('/api/weather', methods=['GET'])
